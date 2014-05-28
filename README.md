@@ -1,8 +1,6 @@
-Battleship
-==========
+=======================================================================
+                               Battleship
+=======================================================================
 
-Little Battleship game in Pascal
-
-Source code : Battleship.pas
-Compil.bat : Compilation batch for Free Pascal (installed with Dev Pascal)
-Battleship.exe : Launch & play ;)
+Battleship is a little game in C I am currently developing for fun.
+It is just a classical Battleship game, nothing special.
