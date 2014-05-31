@@ -1,12 +1,11 @@
------------------BATTLESHIP-----------------
-Player 1, place your boats
-Player 2, place your boats
-Place a boat with a length of %d tiles (Indicate 2 coordinates, from A0 to J9, separated with a space) : 
+Player %d, place your boats
+Place a boat with a length of %d tiles (Indicate 2 coordinates,
+from A0 to J9, separated with a space) : 
 Error : invalid input !
 Error : wrong size of boat !
 Error : Boats are overriding !
 Boat successfully registered !
-Do you want to confirm and keep this grid ? y/n
+Do you want to confirm and keep this grid ? y/n : 
 Let the battle begin !
 Player %d, it is your turn
 Your grid :

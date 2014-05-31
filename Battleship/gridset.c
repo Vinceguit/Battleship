@@ -7,12 +7,19 @@
 
 void setGrid(Tile playerGrid[][10], Boat boatGrid[], int playerId)
 {
-	char confirm = 'n';
+	char  i, *pText, textMain[2][MAX_SIZE], confirm = 'n';
 	FILE *interfaceText = NULL;
 	interfaceText = fopen("interface.txt", "r");
 
 	if (interfaceText != NULL)
 	{
+		fgets(textMain[0], MAX_SIZE, interfaceText);
+		for (i = 1; i <= 7; i++) { fgets(textMain[1], MAX_SIZE, interfaceText); }
+		pText = textMain[1];
+		pText[strlen(pText) - 1] = 0;
+
+		printf(textMain[0], playerId);
+
 		while (confirm == 'n' || confirm == 'N')
 		{
 			initGrid(playerGrid);
@@ -25,8 +32,9 @@ void setGrid(Tile playerGrid[][10], Boat boatGrid[], int playerId)
 
 			do
 			{
-				printf("Do you want to confirm and keep this grid ? y/n ");
+				printf(textMain[1]);
 				scanf("%c", &confirm);
+				printf("\n");
 			} while (confirm != 'y' && confirm != 'n' && confirm != 'Y' && confirm != 'N');
 
 			if (confirm == 'n' || confirm == 'N') { initGrid(playerGrid); }
@@ -43,7 +51,7 @@ void setGrid(Tile playerGrid[][10], Boat boatGrid[], int playerId)
 static void placeBoats(Tile playerGrid[][10], Boat boatGrid[], FILE *interfaceText, int boatSize, int boatId)
 {
 	int i, isInputInvalid, isBoatSizeWrong, isBoatOverriding = 1;
-	char purge, *pText, text[2][MAX_SIZE], error[3][MAX_SIZE];
+	char purge, *pText, text[3][MAX_SIZE], error[3][MAX_SIZE];
 	Tile pos1, pos2;
 
 	boatGrid[boatId].size = boatSize;
@@ -51,24 +59,25 @@ static void placeBoats(Tile playerGrid[][10], Boat boatGrid[], FILE *interfaceTe
 	
 	while (isBoatOverriding != 0)
 	{
-		isBoatSizeWrong = 1;
-
 		rewind(interfaceText);
-		for (i = 0; i <= 3; i++) { fgets(text[0], MAX_SIZE, interfaceText); }
+		for (i = 0; i <= 1; i++) { fgets(text[0], MAX_SIZE, interfaceText); }
+		fgets(text[1], MAX_SIZE, interfaceText);
 		fgets(error[0], MAX_SIZE, interfaceText);
 		fgets(error[1], MAX_SIZE, interfaceText);
 		fgets(error[2], MAX_SIZE, interfaceText);
-		fgets(text[1], MAX_SIZE, interfaceText);
+		fgets(text[2], MAX_SIZE, interfaceText);
 
-		pText = text[0];
+		pText = text[1];
 		pText[strlen(pText) - 1] = 0;
 
+		isBoatSizeWrong = 1;
 		while (isBoatSizeWrong != 0)
 		{
 			isInputInvalid = 1;
 			while (isInputInvalid != 0)
 			{
 				printf(text[0], boatSize);
+				printf(text[1]);
 				scanf("%c%c %c%c", &pos1.y, &pos1.x, &pos2.y, &pos2.x);
 				while (purge = _fgetchar(), purge != '\n' && purge != EOF);
 				pos1.x = pos1.x - 48;
@@ -108,7 +117,7 @@ static void placeBoats(Tile playerGrid[][10], Boat boatGrid[], FILE *interfaceTe
 
 		if (isBoatOverriding == 0)
 		{
-			printf(text[1]);
+			printf(text[2]);
 			displayGrid(playerGrid, pers);
 		}
 		else
