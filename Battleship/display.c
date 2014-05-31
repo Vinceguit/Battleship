@@ -13,7 +13,6 @@ void displayGrid(Tile grid[][10], gridType displayType)
 	for (i = 1; i <= 44; i++) { printf("-"); }
 	printf("\n");
 
-	
 	if (displayType == pers)
 	{
 		for (posY = 'A'; posY <= 'J'; posY++)
@@ -36,4 +35,6 @@ void displayGrid(Tile grid[][10], gridType displayType)
 			printf("\n");
 		}
 	}
+
+	printf("\n");
 }

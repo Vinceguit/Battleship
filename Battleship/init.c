@@ -4,9 +4,9 @@
 
 void exchange(char *var1, char *var2)
 {
-	char varTmp = *var1;
-	*var1 = *var2;
-	*var2 = varTmp;
+	*var1 = *var1 + *var2; // a = a0 + b0
+	*var2 = *var1 - *var2; // b = a - b = a0 + b0 - b0 = a0
+	*var1 = *var1 - *var2; // a = a - b = a0 + b0 - a0 = b0
 }
 
 void initGrid(Tile grid[][10])

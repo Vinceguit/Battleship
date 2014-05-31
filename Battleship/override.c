@@ -4,44 +4,56 @@
 
 int testOverride_xStatic(Tile playerGrid[][10], Boat boatGrid[], Tile pos1, Tile pos2, int boatId)
 {
-	int i, j = 0;
+	int i, j = 0, override = 0;
 
 	if (pos1.y > pos2.y) { exchange(&pos1.y, &pos2.y); }
-	for (i = pos1.y; i <= pos2.y; i++)
+	i = pos1.y;
+
+	while ((i <= pos2.y) && (override == 0))
 	{
-		if (playerGrid[pos1.x][i].statePers == 'O') { return 1; }
+		if (playerGrid[pos1.x][i].statePers == 0) { override = 0; }
+		else { override = 1; }
+		i++;
 	}
 
-	if (testOverride_xStatic == 0)
+	if (override == 0)
 	{
 		for (i = pos1.y; i <= pos2.y; i++)
 		{
 			playerGrid[pos1.x][i].statePers = 'O';
 			boatGrid[boatId].coord[j].x = pos1.x;
 			boatGrid[boatId].coord[j].y = i;
-			j = j + 1;
+			j++;
 		}
 	}
+
+	return override;
 }
 
 int testOverride_yStatic(Tile playerGrid[][10], Boat boatGrid[], Tile pos1, Tile pos2, int boatId)
 {
-	int i, j = 0;
+	int i, j = 0, override = 0;
 
 	if (pos1.x > pos2.x) { exchange(&pos1.x, &pos2.x); }
-	for (i = pos1.x; i <= pos2.x; i++)
+	i = pos1.x;
+
+	while ((i <= pos2.x) && (override == 0))
 	{
-		if (playerGrid[i][pos1.y].statePers == 'O') { return 1; }
+		if (playerGrid[i][pos1.y].statePers == 0) { override = 0; }
+		else { override = 1; }
+		i++;
 	}
 
-	if (testOverride_yStatic == 0)
+	if (override == 0)
 	{
 		for (i = pos1.x; i <= pos2.x; i++)
 		{
 			playerGrid[i][pos1.y].statePers = 'O';
 			boatGrid[boatId].coord[j].x = i;
 			boatGrid[boatId].coord[j].y = pos1.y;
-			j = j + 1;
+			j++;
 		}
 	}
+
+	return override;
 }

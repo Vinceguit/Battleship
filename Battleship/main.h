@@ -7,7 +7,7 @@ typedef struct Tile
 
 typedef struct BoatCoord
 {
-	char x, y;
+	char x, y, state;
 } BoatCoord;
 
 typedef struct Boat

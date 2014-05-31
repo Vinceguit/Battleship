@@ -1,3 +1,2 @@
-void setGrid(Tile playerGrid[][10], Boat boatGrid[]);
-
-static void placeBoats(Tile playerGrid[][10], Boat boatGrid[], int boatSize, int boatId);
+void setGrid(Tile playerGrid[][10], Boat boatGrid[], int playerId);
+static void placeBoats(Tile playerGrid[][10], Boat boatGrid[],FILE *interfaceText, int boatSize, int boatId);
