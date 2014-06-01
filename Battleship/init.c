@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "stdafx.h"
 
 /*Procedure exchangeChr : exchanges two variables of char type.*/

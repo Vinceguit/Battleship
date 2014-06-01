@@ -51,7 +51,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
@@ -85,6 +85,7 @@
     <ClInclude Include="init.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="gridset.h" />
+    <ClInclude Include="move.h" />
     <ClInclude Include="override.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
@@ -93,6 +94,7 @@
     <ClCompile Include="gridset.c" />
     <ClCompile Include="init.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="move.c" />
     <ClCompile Include="override.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

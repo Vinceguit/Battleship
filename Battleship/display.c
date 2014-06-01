@@ -1,8 +1,7 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "stdafx.h"
 
-/*Procedure displayGrid : displays the player grid, from the player's view (pers), or from the enemy's view(enemy)*/
+/*Procedure displayGrid : displays the player grid, from the player's view (pers), or from the enemy's view
+(enemy)*/
 void displayGrid(Tile grid[][10], gridType displayType)
 {
 	int i, posX;
@@ -15,7 +14,8 @@ void displayGrid(Tile grid[][10], gridType displayType)
 	for (i = 1; i <= 44; i++) { printf("-"); }
 	printf("\n");
 
-	/*Displays each line, with the y coordinate, and the state of each case (statePers if personal display, stateEnemy if enemy display)*/
+	/*Displays each line, with the y coordinate, and the state of each case (statePers if personal display,
+	stateEnemy if enemy display)*/
 	if (displayType == pers)
 	{
 		for (posY = 'A'; posY <= 'J'; posY++)
@@ -40,4 +40,25 @@ void displayGrid(Tile grid[][10], gridType displayType)
 	}
 
 	printf("\n");
+}
+
+/*Procedure firstMove : Display the first move message read from the interface file.*/
+void firstMove()
+{
+	char i, text[MAX_SIZE];
+	FILE *interfaceText = NULL;
+	interfaceText = fopen("interface.txt", "r");
+
+	if (interfaceText != NULL)
+	{
+		for (i = 0; i <= 8; i++) { fgets(text, MAX_SIZE, interfaceText); }
+		printf(text);
+		printf("\n");
+	}
+	else
+	{
+		/*Error : security if the file cannot be loaded*/
+		printf("An error occured while loading interface.txt\n");
+	}
+	fclose(interfaceText);
 }

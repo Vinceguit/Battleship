@@ -11,7 +11,9 @@ Player %d, it is your turn
 Your grid :
 Your opponent's grid :
 Player %d, enter a target coordinate (from A0 to J9) : 
+Miss !
+Hit !
+Sunk !
 End of game !
 The winner is : Player %d
-Player 1's grid :
-Player 2's grid :
+Player %d's grid :

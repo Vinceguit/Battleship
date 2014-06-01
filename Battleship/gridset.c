@@ -1,7 +1,3 @@
-#define _CRT_SECURE_NO_DEPRECATE
-#define MAX_SIZE 200
-#include <stdio.h>
-#include <stdlib.h>
 #include "stdafx.h"
 #include "override.h"
 
@@ -60,28 +56,27 @@ void setGrid(Tile playerGrid[][10], Boat boatGrid[], int playerId)
 input coordinates validity, size of the boat, and override with other boats*/
 static void placeBoats(Tile playerGrid[][10], Boat boatGrid[], FILE *interfaceText, int boatSize, int boatId)
 {
-	int i, isInputInvalid, isBoatSizeWrong, isBoatOverriding = 1;
-	char purge, *pText, text[3][MAX_SIZE], error[3][MAX_SIZE];
+	int isInputInvalid, isBoatSizeWrong, isBoatOverriding = 1;
+	char i, purge, *pText, text[3][MAX_SIZE], error[3][MAX_SIZE];
 	Tile pos1, pos2;
 
 	/*Initialising the variables used in the game for each boat : size, and state (sunk or not)*/
 	boatGrid[boatId].size = boatSize;
 	boatGrid[boatId].isSunk = 0;
 	
+	/*Reading all the interface messages from the file*/
+	rewind(interfaceText);
+	for (i = 0; i <= 1; i++) { fgets(text[0], MAX_SIZE, interfaceText); }
+	fgets(text[1], MAX_SIZE, interfaceText);
+	fgets(error[0], MAX_SIZE, interfaceText);
+	fgets(error[1], MAX_SIZE, interfaceText);
+	fgets(error[2], MAX_SIZE, interfaceText);
+	fgets(text[2], MAX_SIZE, interfaceText);
+	pText = text[1];
+	pText[strlen(pText) - 1] = 0;
+
 	while (isBoatOverriding != 0)
 	{
-		/*Reading all the interface messages from the file*/
-		rewind(interfaceText);
-		for (i = 0; i <= 1; i++) { fgets(text[0], MAX_SIZE, interfaceText); }
-		fgets(text[1], MAX_SIZE, interfaceText);
-		fgets(error[0], MAX_SIZE, interfaceText);
-		fgets(error[1], MAX_SIZE, interfaceText);
-		fgets(error[2], MAX_SIZE, interfaceText);
-		fgets(text[2], MAX_SIZE, interfaceText);
-
-		pText = text[1];
-		pText[strlen(pText) - 1] = 0;
-
 		isBoatSizeWrong = 1;
 		while (isBoatSizeWrong != 0)
 		{
@@ -93,11 +88,11 @@ static void placeBoats(Tile playerGrid[][10], Boat boatGrid[], FILE *interfaceTe
 				printf(text[1]);
 				scanf("%c%c %c%c", &pos1.y, &pos1.x, &pos2.y, &pos2.x);
 				while (purge = _fgetchar(), purge != '\n' && purge != EOF);
+				printf("\n");
 				pos1.x = pos1.x - 48;
 				pos2.x = pos2.x - 48;
 				pos1.y = pos1.y - 65;
 				pos2.y = pos2.y - 65;
-				printf("\n");
 
 				/*If the coordinates are out of bounds, the input is declared invalid*/
 				if ((0 <= pos1.y) && (pos1.y <= 9) && (0 <= pos1.x) && (pos1.x <= 9) && (0 <= pos2.y) && (pos2.y <= 9) && (0 <= pos2.x) && (pos2.x <= 9))
@@ -125,7 +120,8 @@ static void placeBoats(Tile playerGrid[][10], Boat boatGrid[], FILE *interfaceTe
 			}
 		}
 
-		/*Override test and placement of the boats on the grid if it is safe. 2 different algorithms, depending on which coordinate is static*/
+		/*Override test and placement of the boats on the grid if it is safe. 2 different algorithms,
+		depending on which coordinate is static*/
 		if (pos1.x == pos2.x)
 		{
 			isBoatOverriding = testOverride_xStatic(playerGrid, boatGrid, pos1, pos2, boatId);

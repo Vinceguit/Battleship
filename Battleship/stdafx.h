@@ -1,7 +1,8 @@
 #pragma once
 
+#define MAX_SIZE 200
 #include <stdio.h>
-#include <tchar.h>
+#include <stdlib.h>
 #include "main.h"
 #include "init.h"
 #include "display.h"

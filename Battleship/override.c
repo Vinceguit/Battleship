@@ -1,8 +1,8 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "stdafx.h"
 
-/*Function testOverride_xStatic : tests for the input boat IN COLUMN if there is any override of an existing boat, if not the boat is placed and registered on the boat grid. Returns the override status (0 or 1)*/
+/*Function testOverride_xStatic : tests for the input boat IN COLUMN if there is any override of an
+existing boat, if not the boat is placed and registered on the boat grid.
+Returns the override status (0 or 1).*/
 int testOverride_xStatic(Tile playerGrid[][10], Boat boatGrid[], Tile pos1, Tile pos2, int boatId)
 {
 	int i, j = 0, override = 0;
@@ -34,7 +34,8 @@ int testOverride_xStatic(Tile playerGrid[][10], Boat boatGrid[], Tile pos1, Tile
 	return override;
 }
 
-/*Function testOverride_yStatic : Same function as x_Static, but the input boat is IN LINE. Returns the override status (0 or 1)*/
+/*Function testOverride_yStatic : Same function as x_Static, but the input boat is IN LINE.
+Returns the override status (0 or 1).*/
 int testOverride_yStatic(Tile playerGrid[][10], Boat boatGrid[], Tile pos1, Tile pos2, int boatId)
 {
 	int i, j = 0, override = 0;
