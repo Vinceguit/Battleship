@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
 	Boat boatsP1[5], boatsP2[5];
 
 	printf("-----------------BATTLESHIP-----------------\n\n");
-	setGrid(gridP1, boatsP1, 1);
+	setGrid(gridP1, boatsP1, 1); //function called in gridset.c
 	setGrid(gridP2, boatsP2, 2);
 	system("pause");
 	return 0;

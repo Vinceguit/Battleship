@@ -1,0 +1,17 @@
+Joueur %d, placez vos bateaux
+Placez un bateau de %d cases de long (Indiquez 2 coordonnees,
+de A0 a J9, separees par un espace) : 
+Erreur : entree invalide !
+Erreur : taille de bateau invalide !
+Erreur : les bateaux se chevauchent !
+Bateau enregistre avec succes !
+Voulez vous garder cette grille ? y/n : 
+Que la bataille commence !
+Joueur %d, c'est a votre tour
+Votre grille :
+La grille adverse :
+Joueur %d, entrez une coordonnee (de A0 a J9) :
+Fin de partie !
+Le gagnant est le joueur %d
+Grille du joueur 1 :
+Grille du joueur 2 : 
