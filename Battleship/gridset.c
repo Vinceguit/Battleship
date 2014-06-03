@@ -2,54 +2,43 @@
 #include "override.h"
 
 /*Procedure setGrid : initialises, reads the boats positions, and asks for confirmation*/
-void setGrid(Tile playerGrid[][10], Boat boatGrid[], int playerId)
+void setGrid(Tile playerGrid[][10], Boat boatGrid[], int playerId, FILE *interfaceText)
 {
-	char  purge, i, *pText, textMain[2][MAX_SIZE], confirm = 'n';
-	FILE *interfaceText = NULL;
-	interfaceText = fopen("interface.txt", "r");
+	char  purge, i, textMain[2][MAX_SIZE], confirm = 'n';
 
-	if (interfaceText != NULL)
+	/*Reading all the interface messages from the file*/
+	rewind(interfaceText);
+	fgets(textMain[0], MAX_SIZE, interfaceText);
+	for (i = 1; i <= 7; i++) { fgets(textMain[1], MAX_SIZE, interfaceText); }
+	removeLastChar(textMain[1]);
+
+	printf(textMain[0], playerId);
+
+	while (confirm == 'n' || confirm == 'N')
 	{
-		/*Reading all the interface messages from the file*/
-		fgets(textMain[0], MAX_SIZE, interfaceText);
-		for (i = 1; i <= 7; i++) { fgets(textMain[1], MAX_SIZE, interfaceText); }
-		pText = textMain[1];
-		pText[strlen(pText) - 1] = 0;
+		/*Initialisation and display of each grid*/
+		initGrid(playerGrid);
+		displayGrid(playerGrid, pers);
 
-		printf(textMain[0], playerId);
+		/*Placement of each boat*/
+		placeBoats(playerGrid, boatGrid, interfaceText, 2, 0);
+		placeBoats(playerGrid, boatGrid, interfaceText, 3, 1);
+		placeBoats(playerGrid, boatGrid, interfaceText, 3, 2);
+		placeBoats(playerGrid, boatGrid, interfaceText, 4, 3);
+		placeBoats(playerGrid, boatGrid, interfaceText, 5, 4);
 
-		while (confirm == 'n' || confirm == 'N')
+		/*Confirmation of the grid + purge of the clipboard*/
+		do
 		{
-			/*Initialisation and display of each grid*/
-			initGrid(playerGrid);
-			displayGrid(playerGrid, pers);
+			printf(textMain[1]);
+			scanf("%c", &confirm);
+			while (purge = _fgetchar(), purge != '\n' && purge != EOF);
+			printf("\n");
+		} while (confirm != 'y' && confirm != 'n' && confirm != 'Y' && confirm != 'N');
 
-			/*Placement of each boat*/
-			placeBoats(playerGrid, boatGrid, interfaceText, 2, 0);
-			placeBoats(playerGrid, boatGrid, interfaceText, 3, 1);
-			placeBoats(playerGrid, boatGrid, interfaceText, 3, 2);
-			placeBoats(playerGrid, boatGrid, interfaceText, 4, 3);
-			placeBoats(playerGrid, boatGrid, interfaceText, 5, 4);
-
-			/*Confirmation of the grid + purge of the clipboard*/
-			do
-			{
-				printf(textMain[1]);
-				scanf("%c", &confirm);
-				while (purge = _fgetchar(), purge != '\n' && purge != EOF);
-				printf("\n");
-			} while (confirm != 'y' && confirm != 'n' && confirm != 'Y' && confirm != 'N');
-
-			if (confirm == 'n' || confirm == 'N') { initGrid(playerGrid); }
-		}
-	}
-	else
-	{
-		/*Error : security if the file cannot be loaded*/
-		printf("An error occured while loading interface.txt\n");
+		if (confirm == 'n' || confirm == 'N') { initGrid(playerGrid); }
 	}
 
-	fclose(interfaceText);
 	system("cls");
 }
 

@@ -43,22 +43,12 @@ void displayGrid(Tile grid[][10], gridType displayType)
 }
 
 /*Procedure firstMove : Display the first move message read from the interface file.*/
-void firstMove()
+void firstMove(FILE *interfaceText)
 {
 	char i, text[MAX_SIZE];
-	FILE *interfaceText = NULL;
-	interfaceText = fopen("interface.txt", "r");
 
-	if (interfaceText != NULL)
-	{
-		for (i = 0; i <= 8; i++) { fgets(text, MAX_SIZE, interfaceText); }
-		printf(text);
-		printf("\n");
-	}
-	else
-	{
-		/*Error : security if the file cannot be loaded*/
-		printf("An error occured while loading interface.txt\n");
-	}
-	fclose(interfaceText);
+	rewind(interfaceText);
+	for (i = 0; i <= 8; i++) { fgets(text, MAX_SIZE, interfaceText); }
+	printf(text);
+	printf("\n");
 }

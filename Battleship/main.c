@@ -3,23 +3,37 @@
 
 int main(int argc, char *argv[])
 {
-	int isGameOver = 0;
-	Tile gridP1[10][10], gridP2[10][10];
-	Boat boatsP1[5], boatsP2[5];
-	
-	printf("-----------------BATTLESHIP-----------------\n\n");
-	/*Grid initialisation*/
-	setGrid(gridP1, boatsP1, 1);
-	setGrid(gridP2, boatsP2, 2);
+	FILE *interfaceText = NULL;
+	interfaceText = fopen("interface.txt", "r");
 
-	/*Main game*/
-	firstMove();
-	while (isGameOver == 0)
+	if (interfaceText != NULL) // Main execution
 	{
-		isGameOver = playerMove(gridP1, gridP2, boatsP2, 1);
-		if (isGameOver == 0) { isGameOver = playerMove(gridP2, gridP1, boatsP1, 2); }
-	}
+		int isGameOver = 0;
+		Tile gridP1[10][10], gridP2[10][10];
+		Boat boatsP1[5], boatsP2[5];
 
-	getchar();
-	return 0;
+		printf("-----------------BATTLESHIP-----------------\n\n");
+		/*Grid initialisation*/
+		setGrid(gridP1, boatsP1, 1, interfaceText);
+		setGrid(gridP2, boatsP2, 2, interfaceText);
+
+		/*Main game*/
+		firstMove(interfaceText);
+		while (isGameOver == 0)
+		{
+			isGameOver = playerMove(gridP1, gridP2, boatsP2, 1, interfaceText);
+			if (isGameOver == 0) { isGameOver = playerMove(gridP2, gridP1, boatsP1, 2, interfaceText); }
+		}
+
+		getchar();
+		fclose(interfaceText);
+		return 0;
+	}
+	else
+	{
+		/*Error : security if the file cannot be loaded*/
+		printf("An error occured while loading interface.txt. Press Enter to exit ...");
+		getchar();
+		return 1;
+	}
 }
