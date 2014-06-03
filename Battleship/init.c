@@ -8,6 +8,14 @@ void exchangeChr(char *var1, char *var2)
 	*var1 = *var1 - *var2;
 }
 
+/*Procedure removeLastChar : Removes the last character from a string.*/
+void removeLastChar(char str[])
+{
+	char *pointer;
+	pointer = str;
+	pointer[strlen(pointer) - 1] = 0;
+}
+
 /*Procedure initGrid : sets the state of each tile of the grid to 0*/
 void initGrid(Tile grid[][10])
 {

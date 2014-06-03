@@ -11,7 +11,11 @@ Joueur %d, c'est a votre tour
 Votre grille :
 La grille adverse :
 Joueur %d, entrez une coordonnee (de A0 a J9) :
+Rate !
+Touche !
+Coule !
 Fin de partie !
 Le gagnant est le joueur %d
-Grille du joueur 1 :
-Grille du joueur 2 : 
+Grille du joueur %d :
+Appuyez sur Entree pour continuer... 
+Joueur %d, appuyez sur Entree pour le tour suivant... 

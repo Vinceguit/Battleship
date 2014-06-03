@@ -20,6 +20,6 @@ int main(int argc, char *argv[])
 		if (isGameOver == 0) { isGameOver = playerMove(gridP2, gridP1, boatsP1, 2); }
 	}
 
-	system("pause");
+	getchar();
 	return 0;
 }

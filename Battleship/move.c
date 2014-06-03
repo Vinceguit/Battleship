@@ -7,7 +7,7 @@ Returns if the game is over or not.*/
 int playerMove(Tile gridPers[][10], Tile gridEnemy[][10], Boat boatGrid[], char playerId)
 {
 	int isInputInvalid = 1, isBoatHit = 0, isBoatSunk, isOpponentDown = 1;
-	char i, j, purge, *pText, text[10][MAX_SIZE], error[MAX_SIZE], result[8];
+	char i, j, purge, text[12][MAX_SIZE], error[MAX_SIZE], result[8];
 	Tile posTarget;
 	FILE *interfaceText = NULL;
 	interfaceText = fopen("interface.txt", "r");
@@ -17,13 +17,17 @@ int playerMove(Tile gridPers[][10], Tile gridEnemy[][10], Boat boatGrid[], char 
 		/*Reading all the interface messages from the file*/
 		for (i = 0; i <= 3; i++) { fgets(error, MAX_SIZE, interfaceText); }
 		for (i = 4; i <= 9; i++) { fgets(text[0], MAX_SIZE, interfaceText); }
-		for (i = 1; i <= 9; i++) { fgets(text[i], MAX_SIZE, interfaceText); }
-		pText = text[3];
-		pText[strlen(pText) - 1] = 0;
-		strcpy(result, text[4]);
+		for (i = 1; i <= 11; i++) { fgets(text[i], MAX_SIZE, interfaceText); }
+		removeLastChar(text[3]);
+		removeLastChar(text[10]);
+		removeLastChar(text[11]);
+		strcpy(result, text[4]); // The default result of the move is "Miss !"
 
 		/*Turn beginning : display of the grids*/
 		printf(text[0], playerId);
+		printf("\n");
+		printf(text[10]);
+		getchar();
 		printf("\n");
 		printf(text[1]);
 		displayGrid(gridPers, pers);
@@ -103,7 +107,7 @@ int playerMove(Tile gridPers[][10], Tile gridEnemy[][10], Boat boatGrid[], char 
 		/*If there is still a boat which is not sunk on the grid, the game is not over*/
 		for (i = 0; i <= 4; i++)
 		{
-			if (boatGrid[i].isSunk = 0) { isOpponentDown = 0; }
+			if (boatGrid[i].isSunk == 0) { isOpponentDown = 0; }
 		}
 
 		/*Display of the result of the move*/
@@ -114,6 +118,7 @@ int playerMove(Tile gridPers[][10], Tile gridEnemy[][10], Boat boatGrid[], char 
 		(from an enemy state) is displayed.*/
 		if (isOpponentDown == 1)
 		{
+			getchar();
 			printf(text[7]);
 			printf(text[8], playerId);
 			printf("\n");
@@ -124,15 +129,22 @@ int playerMove(Tile gridPers[][10], Tile gridEnemy[][10], Boat boatGrid[], char 
 			if (playerId == 1) { displayGrid(gridEnemy, pers); }
 			else if (playerId == 2) { displayGrid(gridPers, pers); }
 		}
-		else { displayGrid(gridEnemy, enemy); }
+		else 
+		{
+			displayGrid(gridEnemy, enemy);
+			printf("\n\n");
+			printf(text[11], playerId);
+			getchar();
+		}
+		fclose(interfaceText);
+		system("cls");
 		return isOpponentDown;
 	}
 	else
 	{
 		/*Error : security if the file cannot be loaded*/
 		printf("An error occured while loading interface.txt\n");
+		fclose(interfaceText);
 		return 1;
 	}
-
-	fclose(interfaceText);
 }

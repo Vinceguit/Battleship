@@ -50,6 +50,7 @@ void setGrid(Tile playerGrid[][10], Boat boatGrid[], int playerId)
 	}
 
 	fclose(interfaceText);
+	system("cls");
 }
 
 /*Procedure placeBoats : places one boat on the player's grid + checks for input errors : 
@@ -57,7 +58,7 @@ input coordinates validity, size of the boat, and override with other boats*/
 static void placeBoats(Tile playerGrid[][10], Boat boatGrid[], FILE *interfaceText, int boatSize, int boatId)
 {
 	int isInputInvalid, isBoatSizeWrong, isBoatOverriding = 1;
-	char i, purge, *pText, text[3][MAX_SIZE], error[3][MAX_SIZE];
+	char i, purge, text[3][MAX_SIZE], error[3][MAX_SIZE];
 	Tile pos1, pos2;
 
 	/*Initialising the variables used in the game for each boat : size, and state (sunk or not)*/
@@ -72,8 +73,7 @@ static void placeBoats(Tile playerGrid[][10], Boat boatGrid[], FILE *interfaceTe
 	fgets(error[1], MAX_SIZE, interfaceText);
 	fgets(error[2], MAX_SIZE, interfaceText);
 	fgets(text[2], MAX_SIZE, interfaceText);
-	pText = text[1];
-	pText[strlen(pText) - 1] = 0;
+	removeLastChar(text[1]);
 
 	while (isBoatOverriding != 0)
 	{
