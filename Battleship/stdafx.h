@@ -1,4 +1,5 @@
-#pragma once
+#ifndef STDAFX
+#define STDAFX
 
 #define MAX_SIZE 200
 #include <stdio.h>
@@ -7,3 +8,5 @@
 #include "init.h"
 #include "display.h"
 #include "gridset.h"
+
+#endif
