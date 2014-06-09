@@ -63,7 +63,7 @@ int playerMove(Tile gridPers[][10], Tile gridEnemy[][10], Boat boatGrid[], char 
 		}
 		else
 		{
-			/*Error display : Coordinate already targeted*/
+			/*Error display : coordinate already targeted*/
 			printf(error[1]);
 			printf("\n");
 		}
