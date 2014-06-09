@@ -6,19 +6,20 @@ hit or sunk, of if it missed. Displays the result of the turn on the target play
 Returns if the game is over or not.*/
 int playerMove(Tile gridPers[][10], Tile gridEnemy[][10], Boat boatGrid[], char playerId, FILE *interfaceText)
 {
-	int isInputInvalid = 1, isBoatHit = 0, isBoatSunk, isOpponentDown = 1;
-	char i, j, purge, text[12][MAX_SIZE], error[MAX_SIZE], result[8];
+	int isInputInvalid, isAlreadyTargeted = 1, isBoatHit = 0, isBoatSunk, isOpponentDown = 1;
+	char i, j, purge, text[12][MAX_SIZE], error[2][MAX_SIZE], result[8];
 	Tile posTarget;
 
 	/*Reading all the interface messages from the file*/
 	rewind(interfaceText);
-	for (i = 0; i <= 3; i++) { fgets(error, MAX_SIZE, interfaceText); }
+	for (i = 0; i <= 3; i++) { fgets(error[0], MAX_SIZE, interfaceText); }
 	for (i = 4; i <= 9; i++) { fgets(text[0], MAX_SIZE, interfaceText); }
 	for (i = 1; i <= 11; i++) { fgets(text[i], MAX_SIZE, interfaceText); }
+	fgets(error[1], MAX_SIZE, interfaceText);
 	removeLastChar(text[3]);
 	removeLastChar(text[10]);
 	removeLastChar(text[11]);
-	strcpy(result, text[4]); // The default result of the move is "Miss !"
+	strcpy(result, text[4]); // The default result of the move is "Miss !\n"
 
 	/*Turn beginning : display of the grids*/
 	printf(text[0], playerId);
@@ -31,24 +32,39 @@ int playerMove(Tile gridPers[][10], Tile gridEnemy[][10], Boat boatGrid[], char 
 	printf(text[2]);
 	displayGrid(gridEnemy, enemy);
 
-	while (isInputInvalid != 0)
+	while (isAlreadyTargeted != 0)
 	{
-		/*Reading of the target coordinate + purge of the clipboard*/
-		printf(text[3], playerId);
-		scanf("%c%c", &posTarget.y, &posTarget.x);
-		while (purge = _fgetchar(), purge != '\n' && purge != EOF);
-		printf("\n");
-		posTarget.x -= 48;
-		posTarget.y -= 65;
-
-		if ((0 <= posTarget.x) && (posTarget.x <= 9) && (0 <= posTarget.y) && (posTarget.y <= 9))
+		isInputInvalid = 1;
+		while (isInputInvalid != 0)
 		{
-			isInputInvalid = 0;
+			/*Reading of the target coordinate + purge of the clipboard*/
+			printf(text[3], playerId);
+			scanf("%c%c", &posTarget.y, &posTarget.x);
+			while (purge = _fgetchar(), purge != '\n' && purge != EOF);
+			printf("\n");
+			posTarget.x -= 48;
+			posTarget.y -= 65;
+
+			if ((0 <= posTarget.x) && (posTarget.x <= 9) && (0 <= posTarget.y) && (posTarget.y <= 9))
+			{
+				isInputInvalid = 0;
+			}
+			else
+			{
+				/*Error display : invalid input*/
+				printf(error[0]);
+				printf("\n");
+			}
+		}
+
+		if (gridEnemy[posTarget.x][posTarget.y].stateEnemy == 0)
+		{
+			isAlreadyTargeted = 0;
 		}
 		else
 		{
-			/*Error display : invalid input*/
-			printf(error);
+			/*Error display : Coordinate already targeted*/
+			printf(error[1]);
 			printf("\n");
 		}
 	}
@@ -95,7 +111,7 @@ int playerMove(Tile gridPers[][10], Tile gridEnemy[][10], Boat boatGrid[], char 
 	}
 
 	/*If the target is missed, a '~' is displayed on the grid to indicate where the target has missed*/
-	if (result == "Miss !\n")
+	if (isBoatHit == 0)
 	{
 		gridEnemy[posTarget.x][posTarget.y].statePers = '~';
 		gridEnemy[posTarget.x][posTarget.y].stateEnemy = '~';
