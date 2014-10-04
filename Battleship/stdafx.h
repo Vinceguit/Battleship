@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "main.h"
+#include "lang.h"
 #include "init.h"
 #include "display.h"
 #include "gridset.h"

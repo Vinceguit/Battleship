@@ -83,6 +83,7 @@
   <ItemGroup>
     <ClInclude Include="display.h" />
     <ClInclude Include="init.h" />
+    <ClInclude Include="lang.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="gridset.h" />
     <ClInclude Include="move.h" />
@@ -93,6 +94,7 @@
     <ClCompile Include="display.c" />
     <ClCompile Include="gridset.c" />
     <ClCompile Include="init.c" />
+    <ClCompile Include="lang.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="move.c" />
     <ClCompile Include="override.c" />
