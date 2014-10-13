@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 		printf("[1]English\n[2]Francais\nChoose your language : ");
 		scanf("%d", &langChoice);
 	}
-	if (langChoice == 1) { interfaceText = fopen("interface.txt", "r"); }
+	if (langChoice == 1) { interfaceText = fopen("interface_en.txt", "r"); }
 	else if (langChoice == 2) { interfaceText = fopen("interface_fr.txt", "r"); }
 	system("cls");
 
