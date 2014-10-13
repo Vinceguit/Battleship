@@ -39,9 +39,6 @@
     <ClInclude Include="stdafx.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="lang.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="display.c">
@@ -60,9 +57,6 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="override.c">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="lang.c">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
